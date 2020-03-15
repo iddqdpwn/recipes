@@ -1,6 +1,8 @@
 package com.example.recipes2work;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +12,41 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CustomAdapter extends ArrayAdapter<String> {
     private final Context context;
-    private final String[] values;
+    private Intent intent;
+    private String[] values;
     String[] imageUrl;
     ImageView imageView;
     View rowView;
 
-    public CustomAdapter(Context context, String[] values, String[] imageUrl) {
+    String title;
+    String isFavorite;
+
+    public CustomAdapter(Context context, Intent intent, String[] values, String[] imageUrl) {
         super(context, R.layout.list_item, values);
         this.context = context;
         this.values = values;
         this.imageUrl = imageUrl;
+        this.intent = intent;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        rowView = inflater.inflate(R.layout.list_item, parent, false);
+
+        title = values[position];
+        SharedPreferences sPref = getContext().getSharedPreferences("Favorite",MODE_PRIVATE);
+        isFavorite = sPref.getString(title,"not");
+
+        if (isFavorite.equals("not")) {
+            rowView = inflater.inflate(R.layout.list_item, parent, false);
+        } else {
+            rowView = inflater.inflate(R.layout.list_item_favorite, parent, false);
+        }
+
         TextView textView = rowView.findViewById(R.id.text_list_item);
         textView.setText(values[position]);
         imageView = rowView.findViewById(R.id.image_list_item);

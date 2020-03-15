@@ -3,12 +3,24 @@ package com.example.recipes2work;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Description extends AppCompatActivity {
@@ -16,6 +28,7 @@ public class Description extends AppCompatActivity {
     private Toolbar mToolbar;
     String title;
     int position;
+    RelativeLayout myline;//BLAYD
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,7 @@ public class Description extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         title = getIntent().getExtras().getString("recipeTitle");
         getSupportActionBar().setTitle(title);
+
     }
 
     private boolean isFavorite() {
@@ -53,6 +67,8 @@ public class Description extends AppCompatActivity {
         ed.putString(title, "not");
         ed.commit();
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,5 +100,6 @@ public class Description extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
 

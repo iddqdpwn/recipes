@@ -35,7 +35,8 @@ public class FavoriteActivity extends AppCompatActivity {
     protected void onStart() {
         loadFavorites();
         ListView listView = findViewById(R.id.listView);
-        CustomAdapter adapter =  new CustomAdapter(this, favoriteTitles, favoriteImgUrl);
+        Intent myIntent = getIntent();
+        CustomAdapter adapter =  new CustomAdapter(this,myIntent, favoriteTitles, favoriteImgUrl);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,6 +79,7 @@ public class FavoriteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+
                 this.finish();
                 return true;
             default:
