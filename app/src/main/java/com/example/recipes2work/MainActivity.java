@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import android.widget.AdapterView.OnItemClickListener;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity{
 
     private Toolbar mToolbar;
     String[] recipeIcon, recipeTitle;
@@ -33,10 +37,29 @@ public class MainActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == 1) {
             listView.setAdapter(adapter);
+            //set on click event
+            listView.setOnItemClickListener( new OnItemClickListener(){
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    genLayout(position);
+                }
+            } );
         } else {
             GridView gridView = findViewById(R.id.gridView);
             gridView.setAdapter(adapter);
+            gridView.setOnItemClickListener(new OnItemClickListener(){
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                   genLayout(position);
+                }
+            });
         }
+    }
+    public void genLayout(int position){
+        Intent intent = new Intent(this, Description.class);
+        intent.putExtra("recipeTitle", recipeTitle[position]);
+        intent.putExtra("position", position);
+        startActivity(intent);
     }
 
     @Override
