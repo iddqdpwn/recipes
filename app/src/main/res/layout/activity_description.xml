@@ -1,25 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scrollbars="horizontal|vertical">
+        >
+
+        <com.example.recipes2work.BaseStatusBar
+            android:id="@+id/baseStatusBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_color"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/gradient_color"
+            android:textSize="17sp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/baseStatusBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
 
         <LinearLayout
-            android:id="@+id/descriptionLine"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout1">
+
+            <ImageView
+                android:id="@+id/imageViewTop"
+                android:layout_width="match_parent"
+                android:layout_height="153dp"
+                android:scaleType="centerCrop"
+
+                />
+
+
         </LinearLayout>
 
-    </ScrollView>
+        <ImageView
+            android:id="@+id/imagePasteIcon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25.5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            app:srcCompat="@drawable/ic_content_paste_24_px" />
+
+        <TextView
+            android:id="@+id/textTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:textSize="13sp"
+            android:text="@string/description"
+            app:layout_constraintStart_toEndOf="@+id/imagePasteIcon1"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+        <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="13sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+        <ImageView
+            android:id="@+id/imageLine1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDescription"
+            app:srcCompat="@drawable/line_2"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/imagePasteIcon2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageLine1"
+            app:srcCompat="@drawable/ic_content_paste_24_px" />
+
+        <TextView
+            android:id="@+id/textTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="11.5dp"
+            android:textSize="13sp"
+            android:text="@string/ingredients"
+            app:layout_constraintStart_toEndOf="@+id/imagePasteIcon1"
+            app:layout_constraintTop_toBottomOf="@+id/imageLine1" />
+        <TextView
+            android:id="@+id/textIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="13sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageLine1" />
 
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/imageLine2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textIngredients"
+            app:srcCompat="@drawable/line_2"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/imageCutlery1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageLine2"
+            app:srcCompat="@drawable/ic_content_paste_24_px" />
+
+        <TextView
+            android:id="@+id/textTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="11.5dp"
+            android:textSize="13sp"
+            android:text="@string/recipe"
+            app:layout_constraintStart_toEndOf="@+id/imagePasteIcon1"
+            app:layout_constraintTop_toBottomOf="@+id/imageLine2" />
+
+        <WebView
+            android:id="@+id/webView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle3"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

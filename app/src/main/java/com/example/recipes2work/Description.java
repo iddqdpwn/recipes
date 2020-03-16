@@ -1,17 +1,13 @@
 package com.example.recipes2work;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Typeface;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,18 +18,16 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 public class Description extends AppCompatActivity {
 
     private Toolbar mToolbar;
     String title;
     int position;
-    RelativeLayout myline;//BLAYD
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite);
+        setContentView(R.layout.activity_description);
 
         //custom toolbar initialization
         mToolbar = findViewById(R.id.toolbar);
@@ -42,6 +36,41 @@ public class Description extends AppCompatActivity {
         title = getIntent().getExtras().getString("recipeTitle");
         getSupportActionBar().setTitle(title);
 
+
+
+        ImageView topImage = findViewById(R.id.imageViewTop);
+        String[] iconName=getResources().getStringArray(R.array.iconName);
+        int pos = getIntent().getExtras().getInt("position");
+        Picasso.with(this).load("file:///android_asset/icon/"+iconName[pos]).into(topImage);
+
+        TextView textDescription = findViewById(R.id.textDescription);
+        String descriptionText=load("description/opis"+pos+".txt");
+        textDescription.setText(descriptionText);
+
+        TextView textIngredients = findViewById(R.id.textIngredients);
+        String ingredients=load("ing/ing"+pos+".txt");
+        textIngredients.setText(ingredients);
+
+        WebView webView = findViewById(R.id.webView1);
+        webView.loadUrl("file:///android_asset/html/ht"+pos+".html");
+        webView.setBackgroundColor(Color.TRANSPARENT);
+
+    }
+    public String load (String text){
+        byte[] buffer = null;
+        InputStream is;
+        try {
+            is = getAssets().open(text);
+            int size = is.available();
+            buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String str_data = new String(buffer);
+        return str_data;
     }
 
     private boolean isFavorite() {
@@ -68,8 +97,6 @@ public class Description extends AppCompatActivity {
         ed.commit();
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_description, menu);
@@ -86,7 +113,6 @@ public class Description extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-               // Intent intent = new Intent();
                 setResult(RESULT_OK);
                 this.finish();
                 return true;
@@ -102,6 +128,5 @@ public class Description extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
 

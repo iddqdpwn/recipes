@@ -36,7 +36,7 @@ public class FavoriteActivity extends AppCompatActivity {
         loadFavorites();
         ListView listView = findViewById(R.id.listView);
         Intent myIntent = getIntent();
-        CustomAdapter adapter =  new CustomAdapter(this,myIntent, favoriteTitles, favoriteImgUrl);
+        CustomAdapter adapter = new CustomAdapter(this, myIntent, favoriteTitles, favoriteImgUrl);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,7 +46,8 @@ public class FavoriteActivity extends AppCompatActivity {
         });
         super.onStart();
     }
-    public void genLayout(int position){
+
+    public void genLayout(int position) {
         Intent intent = new Intent(this, Description.class);
         intent.putExtra("recipeTitle", favoriteTitles[position]);
         intent.putExtra("position", position);
@@ -58,17 +59,17 @@ public class FavoriteActivity extends AppCompatActivity {
         String[] imgUrl = getResources().getStringArray(R.array.iconName);
         ArrayList<String> recipeTitle = new ArrayList<>();
         ArrayList<String> recipeImg = new ArrayList<>();
-        for ( int i = 0; i< name.length; i++) {
-            SharedPreferences sPref = getSharedPreferences("Favorite",MODE_PRIVATE);
+        for (int i = 0; i < name.length; i++) {
+            SharedPreferences sPref = getSharedPreferences("Favorite", MODE_PRIVATE);
             String value = sPref.getString(name[i], "not");
-            if (!value.equals("not")){
+            if (!value.equals("not")) {
                 recipeTitle.add(name[i]);
                 recipeImg.add(imgUrl[i]);
             }
         }
         favoriteTitles = new String[recipeTitle.size()];
         favoriteImgUrl = new String[recipeImg.size()];
-        for (int i = 0; i< recipeTitle.size(); i++){
+        for (int i = 0; i < recipeTitle.size(); i++) {
             favoriteTitles[i] = recipeTitle.get(i);
             favoriteImgUrl[i] = recipeImg.get(i);
         }

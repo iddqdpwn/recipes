@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     String[] recipeIcon, recipeTitle;
@@ -33,38 +33,36 @@ public class MainActivity extends AppCompatActivity{
 
         recipeIcon = getResources().getStringArray(R.array.iconName);
         recipeTitle = getResources().getStringArray(R.array.title);
-
         ListView listView = findViewById(R.id.listView);
 
         Intent myIntent = getIntent();
-        adapter = new CustomAdapter(this,myIntent, recipeTitle, recipeIcon);
+        adapter = new CustomAdapter(this, myIntent, recipeTitle, recipeIcon);
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == 1) {
             listView.setAdapter(adapter);
-            listView.setOnItemClickListener( new OnItemClickListener(){
+            listView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     generateDescriptionLayout(position);
                 }
-            } );
+            });
         } else {
             GridView gridView = findViewById(R.id.gridView);
             gridView.setAdapter(adapter);
-            gridView.setOnItemClickListener(new OnItemClickListener(){
+            gridView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                   generateDescriptionLayout(position);
+                    generateDescriptionLayout(position);
                 }
             });
         }
     }
-    public void generateDescriptionLayout(int position){
+
+    public void generateDescriptionLayout(int position) {
         Intent intent = new Intent(this, Description.class);
         intent.putExtra("recipeTitle", recipeTitle[position]);
         intent.putExtra("position", position);
-        //startActivity(intent);
-        startActivityForResult(intent,1);
-
+        startActivityForResult(intent, 1);
     }
 
     @Override
