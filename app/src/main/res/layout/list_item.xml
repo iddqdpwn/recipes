@@ -19,11 +19,12 @@
 
     <TextView
         android:id="@+id/text_list_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="22dp"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/image_list_item"
         app:layout_constraintTop_toTopOf="parent" />
 

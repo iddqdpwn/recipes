@@ -1,5 +1,6 @@
 package com.example.recipes2work;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity{
 
     private Toolbar mToolbar;
     String[] recipeIcon, recipeTitle;
+    CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
         ListView listView = findViewById(R.id.listView);
 
         Intent myIntent = getIntent();
-        CustomAdapter adapter = new CustomAdapter(this,myIntent, recipeTitle, recipeIcon);
+        adapter = new CustomAdapter(this,myIntent, recipeTitle, recipeIcon);
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == 1) {
             listView.setAdapter(adapter);
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, Description.class);
         intent.putExtra("recipeTitle", recipeTitle[position]);
         intent.putExtra("position", position);
-        startActivity(intent); 
+        //startActivity(intent);
+        startActivityForResult(intent,1);
 
     }
 
@@ -77,5 +80,11 @@ public class MainActivity extends AppCompatActivity{
         return false;
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            adapter.notifyDataSetChanged();
+        }
+    }
 }
